@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Neighborhood Map</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/w3.css" rel="stylesheet" >
+    </head>
+    <body>
+        <nav id="myNav" class="w3-sidenav w3-collapse w3-black w3-padding-small">
+            <h4>Neighborhood Map</h4>
+            <a href="#" class="w3-closenav w3-hide-large" onclick="navigation_close()">&nbsp;&nbsp;&larr;</a>
+            <br>
+
+            <select data-bind="options: places,
+                               optionsText: 'type',
+                               value: typeSelected,
+                               optionsCaption: 'All Places'" class="w3-select w3-border">
+            </select>
+
+            <!-- ko if: typeSelected() === undefined  -->
+                <div data-bind="foreach: places">
+                    <!-- ko foreach: locations -->
+                        <a href="#" data-bind="text: name, click: $root.markerInfo"></a>
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+
+            <!-- ko with: typeSelected -->
+                <div data-bind="foreach: locations">
+                    <a href="#" data-bind="text: name, click: $root.markerInfo"></a>
+                </div>
+            <!-- /ko -->
+
+        </nav>
+
+        <div id="sideDiv" class="w3-main w3-black">
+            <span class="w3-opennav w3-hide-large" id="hamburger" onclick="navigation_open()">&#9776;&nbsp;</span>
+            <div style = 'text-align:center'>
+              <span> Neighborhood Map </span>
+            </div>
+            <div id="map"></div>
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>  <!-- jQuery -->
+        <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script><!-- Knockout v3.3 -->
+
+        <!--App Files-->
+        <script src="js/myLocationsMap.js"></script>
+        <script src="js/app.js"></script>
+
+        <!-- Google Maps API -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9-MnSFxxgA2YmftC13tx6wLZmXhOOZPE&callback=initMap" async
+            defer onerror="showErrorMessage()"></script>
+    </body>
+</html>
